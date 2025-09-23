@@ -1,8 +1,184 @@
-body{
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap");
+
+:root {
+  --bg: #0f1115;
+  --fg: #e9edf1;
+  --muted: #b8c0cc;
+  --card: #171a21;
+  --border: #242938;
+  --accent: #7fd1b9; /* soft mint */
+  --accent-2: #9aa7ff; /* soft lilac */
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --radius: 18px;
 }
 
-div{
-    margin-bottom: 20px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  color: var(--fg);
+  background: radial-gradient(
+      1200px 800px at 10% 0%,
+      #1a1f2a 0%,
+      transparent 60%
+    ),
+    radial-gradient(1000px 600px at 90% 10%, #142427 0%, transparent 60%),
+    linear-gradient(180deg, #0e1116 0%, #0b0e12 100%);
+  line-height: 1.6;
+  display: grid;
+  place-items: start center;
+  padding: 48px 20px 72px;
+}
+
+.page {
+  width: min(980px, 92vw);
+  margin-inline: auto;
+}
+
+.title {
+  width: min(980px, 92vw);
+  margin: 0 auto 18px;
+  text-align: center;
+}
+.title h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent-2) 60%,
+    #fff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.intro {
+  width: min(980px, 92vw);
+  margin: 18px auto 26px;
+  background: color-mix(in oklab, var(--card) 85%, black 15%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 3.2vw, 28px);
+}
+.intro p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-weight: 400;
+  letter-spacing: 0.15px;
+}
+.intro p:first-child {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.youtube {
+  width: min(980px, 92vw);
+  margin: 0 auto 30px;
+  border-radius: calc(var(--radius) + 2px);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: #0c0f14;
+}
+.youtube iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+.menu {
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.menu a {
+  text-decoration: none;
+}
+.menu input[type="button"],
+.menu .btn {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--accent) 35%, white 0%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--accent) 35%, #1a1f29 65%),
+    #11151b
+  );
+  color: #0a0d10;
+  color: #101317;
+  color: #0b0e12;
+  color: #0b0e12;
+  color: var(--fg);
+  box-shadow: 0 6px 18px rgba(127, 209, 185, 0.18),
+    inset 0 0 0 0 rgba(255, 255, 255, 0.15);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease,
+    border-color 0.14s ease;
+  cursor: pointer;
+}
+.menu input[type="button"]:hover,
+.menu .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(127, 209, 185, 0.25);
+  border-color: color-mix(in oklab, var(--accent) 60%, white 0%);
+}
+.menu input[type="button"]:active,
+.menu .btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(127, 209, 185, 0.2);
+}
+
+a {
+  color: var(--accent);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Better focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--accent) 70%, white 0%);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 32px 14px 56px;
+  }
+  .intro {
+    padding: 16px;
+  }
 }
