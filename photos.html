@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billie Eilish — Photos</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Lightbox (dialog element) */
+    dialog#lightbox {
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 2px);
+      background: #0c0f14;
+      max-width: min(92vw, 980px);
+      box-shadow: var(--shadow);
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, .6);
+      backdrop-filter: blur(2px);
+    }
+
+    .lightbox-wrap {
+      position: relative;
+      display: grid;
+      gap: 0;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+      background: #0b0e12;
+    }
+
+    .lightbox-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+      background: #0b0e12;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .icon-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #0f1319;
+      color: var(--fg);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklab, var(--accent) 40%, var(--border) 60%);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .menu {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="title">
+      <h1>Billie Eilish</h1>
+    </div>
+    <div class="subtitle">
+      <h2>Photos</h2>
+    </div>
+
+    <section class="gallery" id="gallery">
+      <a class="photo-card" href="img/image_1.jpg">
+        <img src="img/image_1.jpg" alt="Billie Eilish performing live" />
+      </a>
+
+      <a class="photo-card" href="img/image_2.jpg">
+        <img src="img/image_2.jpg" alt="Billie Eilish backstage" />
+      </a>
+
+      <a class="photo-card" href="img/image_3.jpg">
+        <img src="img/image_3.jpg" alt="Billie Eilish music video still" />
+      </a>
+
+      <a class="photo-card" href="img/image_4.jpg">
+        <img src="img/image_4.jpg" alt="Billie Eilish in the studio" />
+      </a>
+
+      <a class="photo-card" href="img/image_5.jpg">
+        <img src="img/image_5.jpg" alt="Billie Eilish on tour" />
+      </a>
+    </section>
+
+    <div class="menu" aria-label="Page navigation">
+      <a href="index.html" class="btn">Back</a>
+    </div>
+  </div>
+
+  <!-- Accessible Lightbox using <dialog> -->
+  <dialog id="lightbox" aria-label="Image viewer">
+    <img id="lightbox-img" class="lightbox-img" alt="Expanded gallery image" />
+  </dialog>
+
+  <script>
+    // Minimal lightbox: open on thumbnail click, close on backdrop/Esc
+    const gallery = document.getElementById('gallery');
+    const dlg = document.getElementById('lightbox');
+    const big = document.getElementById('lightbox-img');
+
+    // Open
+    gallery.addEventListener('click', (e) => {
+      const link = e.target.closest('.photo-card');
+      if (!link) return;
+      e.preventDefault();
+      big.src = link.href;                                   // use the anchor's href
+      big.alt = link.querySelector('img')?.alt || 'Photo';   // reuse alt text
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+    });
+
+    // Close when clicking the backdrop (the empty area of the <dialog>)
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+
+    // Close with Escape (for older browsers that might not auto-close)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dlg.open) dlg.close();
+    });
+  </script>
+</body>
+
+</html>

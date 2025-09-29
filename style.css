@@ -70,6 +70,12 @@ body {
   text-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
+.subtitle {
+  text-align: center;
+  margin: 10px 0 22px;
+  color: var(--muted);
+}
+
 .intro {
   width: min(980px, 92vw);
   margin: 18px auto 26px;
@@ -104,6 +110,38 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  width: min(980px, 92vw);
+  margin: 0 auto 26px;
+}
+
+.photo-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: color-mix(in oklab, var(--card) 85%, black 15%);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border) 65%);
+}
+
+.photo-card img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 .menu {
